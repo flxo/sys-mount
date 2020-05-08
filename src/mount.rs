@@ -52,6 +52,10 @@ bitflags! {
         /// file system.
         const NOSUID = MS_NOSUID;
 
+        /// Make this mount point private.  Mount and unmount events do not propagate into or
+        /// out of this mount point.
+        const PRIVATE = MS_PRIVATE;
+
         /// Mount file system read-only.
         const RDONLY = MS_RDONLY;
 
@@ -75,6 +79,13 @@ bitflags! {
         /// MS_NODIRATIME; and, additionally, before kernel 2.4.10, the following could also
         /// be changed: MS_NOSUID, MS_NODEV, MS_NOEXEC.
         const REMOUNT = MS_REMOUNT;
+
+        /// Make this mount point shared.  Mount and unmount events immediately under this mount
+        /// point will propagate to the other mount points that are members of this mount's peer
+        /// group. Propagation here means that the same mount or unmount will automatically occur
+        /// under all of the other mount points in the peer group.  Conversely, mount and unmount
+        /// events that take place under peer mount points will propagate to this mount point.
+        const SHARED = MS_SHARED;
 
         /// Suppress the display of certain (printk()) warning messages in the kernel log.
         /// This flag supersedes the misnamed and obsolete MS_VERBOSE flag (available
